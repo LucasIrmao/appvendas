@@ -1,0 +1,117 @@
+<AdicionarVendasPage>:
+
+    FloatLayout:
+        canvas:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "icones/bg1.png"
+# selecionando cliente:
+        Label:
+            pos_hint: {"right": 1, "top": 1}
+            size_hint: 1, 0.05
+            text: "Selecione o Cliente"
+            markup: True
+            id: label_selecione_cliente
+        ScrollView:
+            pos_hint: {"right": 1, "top": 0.95}
+            size_hint: 1, 0.15
+            GridLayout:
+                rows: 1
+                spacing: 2,2
+                size_hint_x: None
+                width: self.minimum_width
+                col_default_width: "90dp"
+                col_force_default: True
+                id: lista_clientes
+# selecionando produto:
+        Label:
+            pos_hint: {"right": 1, "top": 0.75}
+            size_hint: 1, 0.05
+            text: "Selecione o Produto"
+            markup: True
+            id: label_selecione_produto
+        ScrollView:
+            pos_hint: {"right": 1, "top": 0.7}
+            size_hint: 1, 0.15
+            GridLayout:
+                id: lista_produtos
+                rows: 1
+                spacing: 2,2
+                size_hint_x: None
+                width: self.minimum_width
+                col_default_width: "90dp"
+                col_force_default: True
+
+        Label:
+            pos_hint: {"right": 1, "top": 0.5}
+            size_hint: 1, 0.05
+            text: "Data: 01/01/2023"
+            id: label_data
+            bold: True
+            # Label Button p
+        LabelButton:
+            on_release:  app.mudar_tela("homepage")
+            text: "Cancelar"
+            canvas.before:
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+                    source: "icones/botao_fino.png" if self.state == "normal" else "icones/botao_apertado.png"
+            pos_hint: {"right": 0.45, "top": 0.2}
+            size_hint: 0.4, 0.2
+            text: "Cancelar"
+            markup: True
+
+        LabelButton:
+            text: "Adicionar Venda"
+            canvas.before:
+                Rectangle:
+                    size: self.size
+                    pos: self.pos
+                    source: "icones/botao_fino.png" if self.state == "normal" else "icones/botao_apertado.png"
+            pos_hint: {"right": 0.95, "top": 0.2}
+            size_hint: 0.4, 0.2
+            on_release: app.adicionar_venda()
+            text: "Adicionar Venda"
+            markup: True
+
+        # selecionar a unidade
+        GridLayout:
+            pos_hint: {"right": 0.9, "top": 0.45}
+            size_hint: 0.8, 0.1
+            rows: 1
+            LabelButton:
+                text: "kg:"
+                id: unidades_kg
+                on_release: app.selecionar_unidade("unidades_kg")
+            LabelButton:
+                text: "Unidades"
+                id: unidades_unidades
+                on_release: app.selecionar_unidade("unidades_unidades")
+            LabelButton:
+                text: "Litros"
+                id: unidades_litros
+                on_release: app.selecionar_unidade("unidades_litros")
+        # preco total
+        GridLayout:
+            pos_hint: {"right": 0.9, "top": 0.355}
+            size_hint: 0.8, 0.075
+            rows: 1
+            Label:
+                text: "Preço Total: (R$: )"
+                id: label_preco
+            TextInput:
+                id: preco_total
+                hint_text: "Digite apenas números"
+        # quantidade
+        GridLayout:
+            pos_hint: {"right": 0.9, "top": 0.255}
+            size_hint: 0.8, 0.075
+            rows: 1
+            Label:
+                text: "Quantidade Total: (R$: )"
+                id: label_quantidade
+            TextInput:
+                id: quantidade_total
+                hint_text: "0"
